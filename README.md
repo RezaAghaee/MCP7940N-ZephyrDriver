@@ -40,31 +40,32 @@ Edit the following Zephyr files to register the new driver:
 
 ### 3. DeviceTree Configuration
 Add the following to your board’s DeviceTree (.dts or .overlay) file:
-&i2c0 {
-    status = "okay";
-    pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&i2c0_sleep>;
-    pinctrl-names = "default", "sleep";
-    clock-frequency = <100000>;
 
-    mcp7940: mcp7940@6f {
-        compatible = "microchip,mcp7940";
-        reg = <0x6f>;
+    &i2c0 {
         status = "okay";
-        label = "MCP7940N_RTC";
-        int-gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;  // Adjust to match your interrupt pin
-        vcc-gpios = <&gpio1 3 GPIO_ACTIVE_HIGH>;  // Adjust to match your VCC control pin
+        pinctrl-0 = <&i2c0_default>;
+        pinctrl-1 = <&i2c0_sleep>;
+        pinctrl-names = "default", "sleep";
+        clock-frequency = <100000>;
+    
+        mcp7940: mcp7940@6f {
+            compatible = "microchip,mcp7940";
+            reg = <0x6f>;
+            status = "okay";
+            label = "MCP7940N_RTC";
+            int-gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;  // Adjust to match your interrupt pin
+            vcc-gpios = <&gpio1 3 GPIO_ACTIVE_HIGH>;  // Adjust to match your VCC control pin
+        };
     };
-};
 
 ### 4. Project Configuration
 Add the following to your project’s prj.conf:
 
-CONFIG_I2C=y
-CONFIG_COUNTER=y
-CONFIG_RTC=y
-CONFIG_RTC_MCP7940=y
-CONFIG_RTC_ALARM=y
+    CONFIG_I2C=y
+    CONFIG_COUNTER=y
+    CONFIG_RTC=y
+    CONFIG_RTC_MCP7940=y
+    CONFIG_RTC_ALARM=y
 
 ### 5. Build & Run
 Rebuild your project, flash it to the target board, and use the provided sample code to test
