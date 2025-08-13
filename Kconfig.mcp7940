@@ -1,0 +1,12 @@
+# MICROCHIP MCP7940 RTC
+
+# Copyright (c) 2023 Alvaro Garcia Gomez <maxpowel@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config RTC_MCP7940
+	bool "MICROCHIP MCP7940 RTC driver"
+	default y
+	depends on DT_HAS_MICROCHIP_MCP7940_ENABLED
+	select I2C
+	help
+	  Enable the MICROCHIP MCP7940 RTC driver.
