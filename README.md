@@ -32,11 +32,11 @@ Edit the following Zephyr files to register the new driver:
 
 - **`ncs\v2.5.2\zephyr\drivers\rtc\CMakeLists.txt`**  
   Add:
-  zephyr_library_sources_ifdef(CONFIG_RTC_MCP7940 rtc_mcp7940.c)
+  - **`zephyr_library_sources_ifdef(CONFIG_RTC_MCP7940 rtc_mcp7940.c)`**
 
 - **`ncs\v2.5.2\zephyr\drivers\rtc\Kconfig`**  
   Add:
-  source "drivers/rtc/Kconfig.mcp7940"
+  - **`source "drivers/rtc/Kconfig.mcp7940"`**
 
 ### 3. DeviceTree Configuration
 Add the following to your board’s DeviceTree (.dts or .overlay) file:
