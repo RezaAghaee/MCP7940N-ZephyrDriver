@@ -86,8 +86,10 @@ Rebuild your project, flash it to the target board, and use the provided sample 
         .tm_min = 30,
         .tm_sec = 0,
     };
-
-    struct rtc_time alarm_time = {
+	
+	/* desired alarm time example */
+ 	/*
+    struct rtc_time desired_alarm_time = {
         .tm_year = 2025 - 1900,
         .tm_mon = 7,
         .tm_mday = 25,
@@ -95,6 +97,7 @@ Rebuild your project, flash it to the target board, and use the provided sample 
         .tm_min = 30,
         .tm_sec = 30,
     };
+	*/
 
     static void alarm_callback(const struct device *dev, uint16_t id, void *user_data) {
         //Led blink
@@ -109,15 +112,11 @@ Rebuild your project, flash it to the target board, and use the provided sample 
         rtc_alarm_set_callback(ext_rtc, 0, alarm_callback, NULL);
     
         int rc = rtc_set_time(ext_rtc, &current_time);
-    
-        rc = rtc_alarm_set_time(ext_rtc, 0,
-            RTC_ALARM_TIME_MASK_SECOND,
-            &alarm_time);
-            
+          
         return rc;
     }
 
-    int extRtcHandler_getTime(struct rtc_time *read_time){
+    int ext_rtc_getTime(struct rtc_time *read_time){
         if (!device_is_ready(ext_rtc)) {
             return -ENODEV;
         }
@@ -126,5 +125,17 @@ Rebuild your project, flash it to the target board, and use the provided sample 
         printk("Current RTC time: %04d-%02d-%02d %02d:%02d:%02d\r\n",
 			          read_time->tm_year+1900, read_time->tm_mon, read_time->tm_mday,
 			          read_time->tm_hour, read_time->tm_min, read_time->tm_sec);
+        return rc;
+    }
+
+ 	int ext_rtc_setAlarm(struct rtc_time *alarm_time){
+        if (!device_is_ready(ext_rtc)) {
+            return -ENODEV;
+        }
+    
+        int rc = rtc_alarm_set_time(ext_rtc, 0,
+            RTC_ALARM_TIME_MASK_SECOND,
+            alarm_time);
+			
         return rc;
     }
