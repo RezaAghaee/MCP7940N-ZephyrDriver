@@ -62,7 +62,6 @@ Add the following to your board’s DeviceTree (.dts or .overlay) file:
 Add the following to your project’s prj.conf:
 
     CONFIG_I2C=y
-    CONFIG_COUNTER=y
     CONFIG_RTC=y
     CONFIG_RTC_MCP7940=y
     CONFIG_RTC_ALARM=y
