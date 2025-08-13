@@ -1,5 +1,5 @@
 # MCP7940N-ZephyrDriver
-Driver for the MCP7940N RTC in Zephyr — supports standard RTC time (not Unix) and alarm configuration.
+Driver for the MCP7940N RTC in Zephyr — supports standard RTC time (not Unix counter) and alarm configuration.
 
 ## Features
 - Read and write standard RTC time (calendar date & time, not Unix epoch)
